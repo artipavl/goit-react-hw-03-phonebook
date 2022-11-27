@@ -7,6 +7,28 @@ export class Phonebook extends Component {
     name: '',
     number: '',
   };
+  
+  componentDidMount() {
+    if (JSON.parse(window.localStorage.getItem('name'))) {
+      const name = JSON.parse(window.localStorage.getItem('name'));
+      this.setState({name });
+    }
+
+    if (JSON.parse(window.localStorage.getItem('number'))) {
+      const number = JSON.parse(window.localStorage.getItem('number'));
+      this.setState({number });
+    }
+  }
+
+  componentDidUpdate(prevP, prevS) {
+    if (prevS.name !== this.state.name) {
+      window.localStorage.setItem('name', JSON.stringify(this.state.name));
+    }
+
+    if (prevS.number !== this.state.number) {
+      window.localStorage.setItem('number', JSON.stringify(this.state.number));
+    }
+  }
 
   submitForm = e => {
     e.preventDefault();
@@ -74,7 +96,7 @@ export class Phonebook extends Component {
   }
 }
 
-Phonebook.propTypes= {
+Phonebook.propTypes = {
   addContact: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
