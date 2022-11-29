@@ -14,22 +14,24 @@ export class App extends Component {
 
   componentDidMount() {
     if (JSON.parse(window.localStorage.getItem('contacts'))) {
-      const contacts = JSON.parse(window.localStorage.getItem('contacts'))
-      this.setState({contacts})
+      const contacts = JSON.parse(window.localStorage.getItem('contacts'));
+      this.setState({ contacts });
     }
   }
 
   componentDidUpdate(prevP, prevS) {
     if (prevS.contacts !== this.state.contacts) {
-      window.localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+      window.localStorage.setItem(
+        'contacts',
+        JSON.stringify(this.state.contacts)
+      );
     }
   }
 
   addContact = (name, number) => {
-    this.setState(({ contacts, filter }) => {
+    this.setState(({ contacts }) => {
       return {
         contacts: [...contacts, { id: nanoid(), name, number }],
-        filter,
       };
     });
   };
@@ -47,7 +49,6 @@ export class App extends Component {
       const stateRed = [...state.contacts];
       stateRed.splice(indexEl, 1);
       return {
-        ...state,
         contacts: stateRed,
       };
     });
@@ -55,12 +56,7 @@ export class App extends Component {
 
   changeFilter = e => {
     const input = e.target;
-    this.setState(stat => {
-      return {
-        ...stat,
-        [input.name]: input.value,
-      };
-    });
+    this.setState({ filter: input.value });
   };
 
   render() {
@@ -85,10 +81,7 @@ export class App extends Component {
   }
 }
 
-
-
-      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    
+// { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+// { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+// { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+// { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
