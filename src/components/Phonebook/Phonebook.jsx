@@ -61,11 +61,8 @@ export class Phonebook extends Component {
 
   changeForm = e => {
     const input = e.target;
-    this.setState(stat => {
-      return {
-        ...stat,
-        [input.name]: input.value,
-      };
+    this.setState({
+      [input.name]: input.value,
     });
   };
 
@@ -106,14 +103,3 @@ export class Phonebook extends Component {
     );
   }
 }
-
-// Phonebook.propTypes = {
-//   addContact: PropTypes.func.isRequired,
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//       id: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-// };
