@@ -3,20 +3,31 @@ import PropTypes from 'prop-types';
 import css from 'components/Phonebook/Phonebook.module.css';
 
 export class Phonebook extends Component {
+  static propTypes = {
+    addContact: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  };
+
   state = {
     name: '',
     number: '',
   };
-  
+
   componentDidMount() {
     if (JSON.parse(window.localStorage.getItem('name'))) {
       const name = JSON.parse(window.localStorage.getItem('name'));
-      this.setState({name });
+      this.setState({ name });
     }
 
     if (JSON.parse(window.localStorage.getItem('number'))) {
       const number = JSON.parse(window.localStorage.getItem('number'));
-      this.setState({number });
+      this.setState({ number });
     }
   }
 
@@ -96,13 +107,13 @@ export class Phonebook extends Component {
   }
 }
 
-Phonebook.propTypes = {
-  addContact: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
+// Phonebook.propTypes = {
+//   addContact: PropTypes.func.isRequired,
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//       id: PropTypes.string.isRequired,
+//     })
+//   ).isRequired,
+// };
